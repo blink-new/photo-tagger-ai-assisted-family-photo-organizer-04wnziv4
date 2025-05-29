@@ -31,7 +31,7 @@ export function Dashboard() {
       coverPhoto: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'
     },
     {
-      id: '2', 
+      id: '2',
       name: 'Family Christmas',
       username: user?.username || '',
       photoCount: 18,
@@ -49,7 +49,6 @@ export function Dashboard() {
   ]);
 
   const handleAlbumClick = (album: Album) => {
-    // Navigate to album view
     window.location.href = `/album/${album.username}/${encodeURIComponent(album.name)}`;
   };
 
@@ -58,6 +57,7 @@ export function Dashboard() {
       {
         id: Date.now().toString(),
         name,
+        username: user?.username || 'unknown',
         photoCount: 0,
         coverPhoto: undefined,
         lastModified: '2024-01-01',
@@ -154,7 +154,7 @@ export function Dashboard() {
               <Folder className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{mockAlbums.length}</div>
+              <div className="text-2xl font-bold">{albums.length}</div>
               <p className="text-xs text-muted-foreground">
                 Across your collection
               </p>
@@ -168,7 +168,7 @@ export function Dashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {mockAlbums.reduce((sum, album) => sum + album.photoCount, 0)}
+                {albums.reduce((sum, album) => sum + album.photoCount, 0)}
               </div>
               <p className="text-xs text-muted-foreground">
                 Ready to organize
@@ -199,7 +199,7 @@ export function Dashboard() {
             </Button>
           </div>
           
-          {mockAlbums.length === 0 ? (
+          {albums.length === 0 ? (
             <Card className="text-center py-12">
               <CardContent>
                 <Folder className="h-12 w-12 text-gray-400 mx-auto mb-4" />
@@ -215,7 +215,7 @@ export function Dashboard() {
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {mockAlbums.map((album) => (
+              {albums.map((album) => (
                 <Card 
                   key={album.id} 
                   className="group cursor-pointer hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1"
@@ -284,7 +284,3 @@ export function Dashboard() {
     </div>
   );
 }
-
-const mockAlbums: Album[] = [
-  // ... existing mock albums ...
-];
